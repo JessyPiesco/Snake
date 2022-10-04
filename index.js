@@ -1,8 +1,9 @@
 const mainSnake = document.getElementById("mainSnake")
 let rows = document.getElementsByClassName("gridRow");
 let cell = document.getElementsByClassName("cell")
+let snake= ["0,0"]
 
-let index=[]
+
 
 
 // making the board line 6-31
@@ -23,7 +24,7 @@ function makeColum(num){
   for (let i=0; i<rows.length; i++){
     for(let j=0; j<num; j++){
       let cellBlock = document.createElement("div")
-      cellBlock.setAttribute("id", `${j}-${i}`)
+      cellBlock.setAttribute("id", `${j},${i}`)
 
       console.log(cellBlock)
       rows[j].appendChild(cellBlock).className="cell"
@@ -33,20 +34,34 @@ function makeColum(num){
 }
 makeBoard()
 
-// function assignID (){
+function snakeRender(){
+  for (let i=0; i<snake.length; i++){
 
-//   for(let i=0; i<=rows; i++){
-//     rowN=rows[i]
-//     console.log(rowN)
-//     for(let j=0; j<=cell; j++){
+    document.getElementById(snake[i]).classList.toggle("snake");
+  }
 
-//       index.push([rows[i],cell[j]])
-//     }
+
+}
+document.body.addEventListener('keydown', moveSnake)
+
+function moveSnake(event){
+  // for (let i=0; i<snake.length; i++){
+  //   console.log(snake[i])
+  // }
+let snakeNum= snake[0].split(",")
+console.log(snakeNum)
+// let xCord= Number(snakeNum[0])
+// let yCord= Number(snakeNum[1])
+// if (event.keyCode===38){
+//   for(let i=0; i<rows; i++){
+//     //take ID, split, get, turn i into num and subtract 1, return to string, repeat until it gets to top
+//     yCord= yCord - 1;
+//     console.log(yCord)
 //   }
-
 // }
-// assignID()
-// console.log(index)
+}
+snakeRender()
+moveSnake()
 
 // const board = [
 // [[0,0],[0,1],[0,2]],
