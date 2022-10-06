@@ -18,6 +18,7 @@ h1{
 }
 table{
   background-color: rgb(33, 164, 33);
+
 }
 .gridRow{
   border: 1px solid green;
@@ -31,6 +32,7 @@ table{
 }
 #mainSnake{
   margin-top: 10rem;
+
   /* background-color: aquamarine;
   width:100vh;
   height:100vh
@@ -41,6 +43,6 @@ table{
 .snake{
   background-color: magenta;
 }
-#apple{
+.apple{
   background-color: rgb(193, 24, 24);
 }
