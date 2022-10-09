@@ -56,22 +56,20 @@ function makeColum(num) {
 }
 makeBoard();
 
-
+//Snake element
 function snakeRender() {
-//  if (gameOver()) {location.reload()}
-//  else{
-  for (let i = 0; i < snake.length; i++) {
+for (let i = 0; i < snake.length; i++) {
     document.getElementById(snake[i]).classList.add("snake");
   }
   }
-// }
+
 snakeRender();
 
 function unTogg() {
   document.getElementById(snake[snake.length - 1]).classList.remove("snake");
-
 }
 
+//fruit Elements 72-111
 function appleRender() {
   document.getElementById(apple[0]).classList.add("apple");
   }
@@ -144,10 +142,9 @@ snakeRender();
 
   console.log(snake, "snake arr");
 
-
-  //  console.log(yAx, "yAx")
 }
-alert("Welcome to Snake, apples make you grow! Plums speed you up and banana's will slow you down. Good luck!")
+
+alert("Directions: Welcome to Snake, use your arrow pad to make your snake move, apples make you grow! Plums speed you up and banana's will slow you down. Only apples count toward your score. Good luck!")
 
 function moveSnake(event) {
   //down
