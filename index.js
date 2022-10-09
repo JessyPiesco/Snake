@@ -1,7 +1,7 @@
 const mainSnake = document.getElementById("mainSnake");
 let rows = document.getElementsByClassName("gridRow");
 let cell = document.getElementsByClassName("cell");
-let score= document.getElementById("score")
+let score = document.getElementById("score");
 
 let snake = ["10,16"];
 let snakeNum = snake[0].split(",");
@@ -16,8 +16,8 @@ let yaCord = Number(appleNum[1]);
 let appleXY = [xaCord, yaCord];
 
 let inny;
-let directions= "nothing"
-let food = 0
+let directions = "nothing";
+let food = 0;
 
 // making the board line 12-35
 function makeBoard() {
@@ -44,22 +44,29 @@ function makeColum(num) {
 makeBoard();
 
 function snakeRender() {
+//  if (gameOver()) {location.reload()}
+//  else{
   for (let i = 0; i < snake.length; i++) {
-
     document.getElementById(snake[i]).classList.add("snake");
-    //
   }
-}
+  }
+// }
 snakeRender();
 
 function unTogg() {
   document.getElementById(snake[snake.length - 1]).classList.remove("snake");
+
 }
 
 function appleRender() {
+  // let applesqu =
   document.getElementById(apple[0]).classList.add("apple");
+  // let appleImg = document.createElement("img")
+  // appleImg.src="/pictures/apple.jpeg"
+  // applesqu.appendChild(appleImg)
 }
-appleRender();
+// appleRender();
+reApple()
 
 function reApple() {
   document.getElementById(apple[apple.length - 1]).classList.remove("apple");
@@ -75,61 +82,66 @@ document.body.addEventListener("keydown", moveSnake);
 function direction(move) {
   if (move === "down") {
     yAx[0] = yAx[0] + 1;
-    directions = "down"
+    directions = "down";
   }
   if (move === "up") {
     yAx[0] = yAx[0] - 1;
-    directions = "up"
+    directions = "up";
   }
   if (move === "left") {
     yAx[1] = yAx[1] - 1;
-    directions = "left"
+    directions = "left";
   }
   if (move === "right") {
     yAx[1] = yAx[1] + 1;
-    directions ="right"
+    directions = "right";
   }
   let updateCords = yAx.join(",");
   snake.unshift(updateCords);
   unTogg();
   snake.pop();
-  gameOver()
-  snakeRender();
- eatApple();
-//  console.log(yAx, "yAx")
+gameOver();
+snakeRender();
+
+  eatApple();
+
+  console.log(snake, "snake arr");
+
+
+  //  console.log(yAx, "yAx")
 }
 
 function moveSnake(event) {
   //down
-  if (event.keyCode === 40) {
+  if (event.keyCode === 40 && directions !== "up") {
     clearInterval(inny);
     inny = setInterval(() => {
       direction("down");
-    }, 400);
+    }, 150);
     //inny()
   }
   //up
-  if (event.keyCode === 38) {
+  if (event.keyCode === 38 && directions !== "down") {
     clearInterval(inny);
     inny = setInterval(() => {
       direction("up");
-    }, 400);
+    }, 150);
     //inny()
   }
   //left
-  if (event.keyCode === 37) {
+  if (event.keyCode === 37 && directions !== "right") {
     clearInterval(inny);
     inny = setInterval(() => {
       direction("left");
-    }, 400);
+    }, 150);
     //inny()
   }
   //right
-  if (event.keyCode === 39) {
+  if (event.keyCode === 39 && directions !== "left") {
     clearInterval(inny);
     inny = setInterval(() => {
       direction("right");
-    }, 400);
+    }, 150);
     //inny()
   }
 }
@@ -137,67 +149,70 @@ function moveSnake(event) {
 function eatApple() {
   if (yAx[0] == appleXY[0] && yAx[1] == appleXY[1]) {
     reApple();
-    if (directions === "down"){
+    if (directions === "down") {
       snakeNum = snake[0].split(",");
       xCord = Number(snakeNum[0]);
       yCord = Number(snakeNum[1]);
-      xCord= xCord + 1;
-       yAx = [xCord, yCord];
-let updateCords = yAx.join(",");
-snake.push(updateCords);
+      // xCord++;//++
+      yAx = [xCord, yCord];
+      let updateCords = yAx.join(",");
+      snake.push(updateCords);
+
     }
-    if (directions === "up"){
+    if (directions === "up") {
       snakeNum = snake[0].split(",");
       xCord = Number(snakeNum[0]);
       yCord = Number(snakeNum[1]);
-      xCord= xCord - 1;
-       yAx = [xCord, yCord];
-let updateCords = yAx.join(",");
-snake.push(updateCords);
+      // xCord--; //--
+      yAx = [xCord, yCord];
+      let updateCords = yAx.join(",");
+      snake.push(updateCords);
     }
- if (directions === "left"){
-  snakeNum = snake[0].split(",");
+    if (directions === "left") {
+      snakeNum = snake[0].split(",");
+      xCord = Number(snakeNum[0]);
+      yCord = Number(snakeNum[1]);
+      //yCord--; //--
+      yAx = [xCord, yCord];
+      let updateCords = yAx.join(",");
+      snake.push(updateCords);
+    }
+    if (directions === "right") {
+      snakeNum = snake[0].split(",");
+      xCord = Number(snakeNum[0]);
+      yCord = Number(snakeNum[1]);
+      // yCord++; //++
+      yAx = [xCord, yCord];
+      let updateCords = yAx.join(",");
+      snake.push(updateCords);
+    }
+    food++;
+    score.innerText = food;
+  }
+}
+function gameOver() {
+snakeNum = snake[0].split(",");
   xCord = Number(snakeNum[0]);
   yCord = Number(snakeNum[1]);
-  yCord= yCord - 1;
-   yAx = [xCord, yCord];
-let updateCords = yAx.join(",");
-snake.push(updateCords);
+  console.log(xCord, "xcord", yCord, "yCord");
+   //if(xCord===undefined||yCord=== undefined){
+  if (xCord > 29 || xCord < 0 || yCord < 0 || yCord > 29) {
+    clearInterval(inny);
+    location.reload();
+    alert(`That's a wall! Game Over! Your score is ${food}`);
+  }
+  for (let i = 1; i < snake.length; i++) {
+    if (snake[0] === snake[i]) {
+      console.log(snake[0], "the 0", snake[i], "the i")
+      clearInterval(inny);
+      location.reload();
+      alert(`You ate yourself! Game Over! Your score is ${food}`);
     }
-    if (directions === "right"){
-      snakeNum = snake[0].split(",");
-      xCord = Number(snakeNum[0]);
-      yCord = Number(snakeNum[1]);
-      yCord= yCord + 1;
-       yAx = [xCord, yCord];
-    let updateCords = yAx.join(",");
-    snake.push(updateCords);
+  }
 
-  }
-  food++
-  score.innerText=food
-}
-}
-function gameOver(){
-snakeNum = snake[0].split(",");
-xCord = Number(snakeNum[0]);
-yCord = Number(snakeNum[1]);
-console.log(xCord, "xcord", yCord, "yCord")
-// if(xCord===undefined||yCord=== undefined){
-  if (xCord>29 || xCord<0 || yCord<0 || yCord>29){
-    location.reload()
-    alert("That's a wall! Game Over!")
-  }
-  for(let i=1; i<snake.length; i++){
-    if (snake[0]===snake[i]){
-      location.reload()
-      alert("You ate yourself! Game Over")
-    }
-  }
 }
 
 moveSnake();
-
 
 // const board = [
 // [[0,0],[0,1],[0,2]],
