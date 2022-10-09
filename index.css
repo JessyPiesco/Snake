@@ -41,8 +41,8 @@ table{
 }
 .cell{
   border: 1px solid rgb(61, 85, 23);
-  width: 15px;
-  height: 15px;
+  width: 20px;
+  height: 20px;
 }
 #mainSnake{
 
@@ -65,9 +65,22 @@ table{
   border-radius: 7px; */
 
   background-image: url("pictures/apple2.png");
-  width:15px;
+  width:20px;
   /* min-height: 100%; */
-  height: 15px;
+  height: 20px;
   background-size: 100%;
 /* object-fit: fill; */
+}
+.plum{
+  background-image: url("pictures/plum.jpeg");
+  width:20px;
+  height: 20px;
+  background-size: 100%;
+}
+.banana{
+  background-image: url("pictures/banana.jpeg");
+  width:20px;
+  height: 20px;
+  background-size: 100%;
+  background-repeat: no-repeat;
 }

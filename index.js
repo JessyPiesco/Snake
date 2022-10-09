@@ -15,14 +15,27 @@ let xaCord = Number(appleNum[0]);
 let yaCord = Number(appleNum[1]);
 let appleXY = [xaCord, yaCord];
 
+let plum = ["1,12"];
+let plumNum = plum[0].split(",");
+let xpCord = Number(plumNum[0]);
+let ypCord = Number(plumNum[1]);
+let plumXY = [xpCord, ypCord];
+
+let banana = ["10,1"];
+let bananaNum = banana[0].split(",");
+let xbCord = Number(bananaNum[0]);
+let ybCord = Number(bananaNum[1]);
+let bananaXY = [xbCord, ybCord];
+
 let inny;
 let directions = "nothing";
 let food = 0;
+let speed= 150
 
-// making the board line 12-35
+// making the board line 35-57
 function makeBoard() {
-  makeRow(30);
-  makeColum(30);
+  makeRow(25);
+  makeColum(25);
 }
 function makeRow(num) {
   for (let i = 0; i < num; i++) {
@@ -43,6 +56,7 @@ function makeColum(num) {
 }
 makeBoard();
 
+
 function snakeRender() {
 //  if (gameOver()) {location.reload()}
 //  else{
@@ -59,23 +73,44 @@ function unTogg() {
 }
 
 function appleRender() {
-  // let applesqu =
   document.getElementById(apple[0]).classList.add("apple");
-  // let appleImg = document.createElement("img")
-  // appleImg.src="/pictures/apple.jpeg"
-  // applesqu.appendChild(appleImg)
+  }
+function plumRender(){
+  document.getElementById(plum[0]).classList.add("plum");
 }
-// appleRender();
+function bananaRender()
+{document.getElementById(banana[0]).classList.add("banana");}
+
 reApple()
+rePlum()
+reBanana()
+
 
 function reApple() {
   document.getElementById(apple[apple.length - 1]).classList.remove("apple");
-  xaCord = Math.floor(Math.random() * 29);
-  yaCord = Math.floor(Math.random() * 29);
+  xaCord = Math.floor(Math.random() * 24);
+  yaCord = Math.floor(Math.random() * 24);
   apple = [`${xaCord},${yaCord}`];
   appleXY = [xaCord, yaCord];
   appleRender();
 }
+function rePlum() {
+  document.getElementById(plum[plum.length - 1]).classList.remove("plum");
+  xpCord = Math.floor(Math.random() * 24);
+  ypCord = Math.floor(Math.random() * 24);
+  plum = [`${xpCord},${ypCord}`];
+  plumXY = [xpCord, ypCord];
+  plumRender();
+}
+function reBanana() {
+  document.getElementById(banana[banana.length - 1]).classList.remove("banana");
+  xbCord = Math.floor(Math.random() * 24);
+  ybCord = Math.floor(Math.random() * 24);
+  banana = [`${xbCord},${ybCord}`];
+  bananaXY = [xbCord, ybCord];
+  bananaRender();
+}
+
 
 document.body.addEventListener("keydown", moveSnake);
 
@@ -104,12 +139,15 @@ gameOver();
 snakeRender();
 
   eatApple();
+  eatBanana();
+  eatPlum();
 
   console.log(snake, "snake arr");
 
 
   //  console.log(yAx, "yAx")
 }
+alert("Welcome to Snake, apples make you grow! Plums speed you up and banana's will slow you down. Good luck!")
 
 function moveSnake(event) {
   //down
@@ -117,7 +155,7 @@ function moveSnake(event) {
     clearInterval(inny);
     inny = setInterval(() => {
       direction("down");
-    }, 150);
+    }, speed);
     //inny()
   }
   //up
@@ -125,7 +163,7 @@ function moveSnake(event) {
     clearInterval(inny);
     inny = setInterval(() => {
       direction("up");
-    }, 150);
+    }, speed);
     //inny()
   }
   //left
@@ -133,7 +171,7 @@ function moveSnake(event) {
     clearInterval(inny);
     inny = setInterval(() => {
       direction("left");
-    }, 150);
+    }, speed);
     //inny()
   }
   //right
@@ -141,7 +179,7 @@ function moveSnake(event) {
     clearInterval(inny);
     inny = setInterval(() => {
       direction("right");
-    }, 150);
+    }, speed);
     //inny()
   }
 }
@@ -188,15 +226,24 @@ function eatApple() {
     }
     food++;
     score.innerText = food;
-  }
+  }}
+  function eatPlum() {
+    if (yAx[0] == plumXY[0] && yAx[1] == plumXY[1]) {
+      rePlum();
+      speed= speed-50}
 }
+function eatBanana() {
+  if (yAx[0] == bananaXY[0] && yAx[1] == bananaXY[1]) {
+    reBanana();
+    speed=speed+50}
+  }
 function gameOver() {
 snakeNum = snake[0].split(",");
   xCord = Number(snakeNum[0]);
   yCord = Number(snakeNum[1]);
   console.log(xCord, "xcord", yCord, "yCord");
    //if(xCord===undefined||yCord=== undefined){
-  if (xCord > 29 || xCord < 0 || yCord < 0 || yCord > 29) {
+  if (xCord > 24 || xCord < 0 || yCord < 0 || yCord > 24) {
     clearInterval(inny);
     location.reload();
     alert(`That's a wall! Game Over! Your score is ${food}`);
